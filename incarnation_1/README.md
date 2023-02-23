@@ -1,2 +1,13 @@
-# TeamF_CHEERS
-Official Git repository of TEAM-F for the CHEERS project as part of the project component for the subject "Advanced Programming Practices" under the guidance of Professor Pankaj Kamthan
+### Incarnation 1
+##### Tasks to be done here:
+ 
+ - Implement the selected algorithms from scratch without the use of any native support in programming languages. By extension, implement the full solution to the CHEERS problem.
+ - Ensure adequate modifiability, readability, reusability, and understandability to the code.
+ - Design and implement the following features as reusable functions:
+		 - Sine
+		 - Cos
+		 - Factorial
+		 - Bisection method
+		 - Calculating  **π**
+		 - α calculations
+ - Facilitate providing sample outputs and present it as structured plain text.
