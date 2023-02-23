@@ -1,2 +1,9 @@
-# TeamF_CHEERS
-Official Git repository of TEAM-F for the CHEERS project as part of the project component for the subject "Advanced Programming Practices" under the guidance of Professor Pankaj Kamthan
+#### Incarnation 2
+##### Tasks to be done here:
+ - Implement the solution to the CHEERS problem after a detailed investigation of all opportunities for reuse
+ - Explore native functions and APIs that can support solving the problem efficiently.
+ - Ensure adequate modifiability, readability, reusability, and understandability to the code.
+ - Facilitate providing sample outputs and express it as in XML.
+ 
+#### Task holders:
+Anant, Goutham
