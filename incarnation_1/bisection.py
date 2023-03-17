@@ -1,42 +1,43 @@
-class bisection:
-    def __init__(self, func, lower_bound, upper_bound, error_tolerance):
-        """
-            a special method in Python classes that is called when an instance of the class is created. 
-            It allows you to initialize the attributes of the object and perform any other necessary setup.
-        """
-        self.func = func
-        self.lower_bound = lower_bound
-        self.upper_bound = upper_bound
-        self.error_tolerance = error_tolerance
+import PI
+import trignometric
+from decimal import Decimal, getcontext
 
-    def solve(self):
-        """Solves for a root of a non-linear function, given root boundaries and acceptable error"""
-        # Convert user-entered string to interpretable mathematical function
-        def f(x):
-            return eval(self.func)
+def bisection(lower_bound, upper_bound, error_tolerance):
+    """Solves for a value of alpha, given alpha boundaries and acceptable error"""
+    
+    # Mathematical function to check for the solution of alpha
+    def f(alpha):
+        alpha_degree = Decimal(alpha)*Decimal('57.2958')
+        return Decimal(alpha) - trignometric.sin(Decimal(alpha_degree)) - Decimal('1.5708') #Decimal(pi_estimator.calculate()/2)
 
-        # Set initial error values
-        actual_error = abs(self.upper_bound - self.lower_bound)
+    # Set initial error values
+    actual_error = abs(upper_bound - lower_bound)
 
-        # Calculate root using bisection method
-        while actual_error > self.error_tolerance:
-            midpoint = (self.lower_bound + self.upper_bound) / 2
+    # Calculate alpha using bisection method
+    try:
+        while actual_error > error_tolerance:
+            midpoint = (lower_bound + upper_bound) / 2
 
-            if f(self.lower_bound) * f(self.upper_bound) >= 0:
+            if f(lower_bound) * f(upper_bound) >= 0:
                 print("No root present within the given values. Try different values")
                 return None
 
-            elif f(midpoint) * f(self.lower_bound) < 0:
-                self.upper_bound = midpoint
-                actual_error = abs(self.upper_bound - self.lower_bound)
+            elif f(midpoint) * f(lower_bound) < 0:
+                upper_bound = midpoint
+                actual_error = abs(upper_bound - lower_bound)
 
-            elif f(midpoint) * f(self.upper_bound) < 0:
-                self.lower_bound = midpoint
-                actual_error = abs(self.upper_bound - self.lower_bound)
+            elif f(midpoint) * f(upper_bound) < 0:
+                lower_bound = midpoint
+                actual_error = abs(upper_bound - lower_bound)
 
-            else:
-                print("Something went wrong")
-                return None
-
-        root = (self.lower_bound + self.upper_bound) / 2
+        root = (lower_bound + upper_bound) / 2
         return root
+    
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
+        return None
+
+#Testing the bisection method
+if __name__ == '__main__':
+    pi_estimator = PI.PI()
+    print(bisection(2,3,0.001))
