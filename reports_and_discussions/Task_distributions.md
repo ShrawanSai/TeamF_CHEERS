@@ -6,7 +6,7 @@
 ### Team members: 
 1. Shrawan Sai Malyala : 
 2. Goutham Sursarla
-3. Anant Bir Deol
+3. Anant Bir Singh
 4. Vishwas Tomar
 5. Jwalit Shah
 6. Leesha
