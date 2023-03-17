@@ -8,7 +8,7 @@ def bisection(lower_bound, upper_bound, error_tolerance):
     # Mathematical function to check for the solution of alpha
     def f(alpha):
         alpha_degree = Decimal(alpha)*Decimal('57.2958')
-        return Decimal(alpha) - trignometric.sin(Decimal(alpha_degree)) - Decimal('1.5708') #Decimal(pi_estimator.calculate()/2)
+        return Decimal(alpha) - trignometric.sin(Decimal(alpha_degree)) - Decimal(pi_estimator.calculate()/2)
 
     # Set initial error values
     actual_error = abs(upper_bound - lower_bound)
