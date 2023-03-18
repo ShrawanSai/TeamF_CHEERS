@@ -1,6 +1,6 @@
 from decimal import Decimal, getcontext
 import random,pickle
-# Set precision to 100 digits
+# Set precision to 100 digits for precise answers
 getcontext().prec = 100
 
 
