@@ -1,5 +1,6 @@
 from decimal import Decimal, getcontext
-import random,pickle
+import random
+import pickle
 # Set precision to 100 digits for precise answers
 getcontext().prec = 100
 
@@ -8,17 +9,17 @@ class Math:
     """
         A Class that returns the Math functions: Sine, Cosine, Factorial.
     """
-    
+
     @staticmethod
-    def _abs(value:float) -> float:
-        
+    def _abs(value: float) -> float:
+
         if value >= 0:
             return value
         else:
             return value*-1
-    
+
     @staticmethod
-    def _powerof(base:float, exponent: int) -> float:
+    def _powerof(base: float, exponent: int) -> float:
         result = 1
         if exponent == 0:
             return result
@@ -29,9 +30,8 @@ class Math:
             result *= base
         return result
 
-    
     @staticmethod
-    def _dart_board(darts:int)-> float:
+    def _dart_board(darts: int) -> float:
         """
         Simulate the throwing of darts to calculate an estimate of pi.
 
@@ -46,8 +46,8 @@ class Math:
         for i in range(darts):
             x_coord = random.uniform(-1, 1)
             y_coord = random.uniform(-1, 1)
-            x_sqr = Math._powerof(x_coord,2)
-            y_sqr = Math._powerof(y_coord,2)
+            x_sqr = Math._powerof(x_coord, 2)
+            y_sqr = Math._powerof(y_coord, 2)
             # If the throw is on the unit circle or inside the unit circle area
             # then increment score value
             if x_sqr + y_sqr <= 1:
@@ -57,9 +57,8 @@ class Math:
         pi = 4 * (score / darts)
         return pi
 
-
     @staticmethod
-    def get_pi(ROUNDS = 1000)-> float:
+    def get_pi(ROUNDS=1000) -> float:
         """
             Calculate the value of pi.
             Where we run the dartboard algorithm number of times to get better accuracy.
@@ -74,14 +73,13 @@ class Math:
             except (FileNotFoundError, EOFError, pickle.UnpicklingError):
                 pass
 
-                
         average_pi = 0
         # Calculate average pi for each iteration
         for i in range(ROUNDS):
             home_pi = Math._dart_board(DARTS)
             average_pi = ((average_pi * i) + home_pi) / (i + 1)
         # return the averaged pi, calculated in all the rounds
-        
+
         # Saving value of pi it was calculated at 1000 rounds
         if ROUNDS == 1000:
             try:
@@ -113,12 +111,11 @@ class Math:
         except ValueError as e:
             print(e)
             return None
-    
+
     @staticmethod
     def sin(x: float) -> Decimal:
-        
         """Compute the sine of x using a Taylor series expansion"""
-        
+
         try:
             # Convert x to radians
             x = Decimal(x)
@@ -131,7 +128,7 @@ class Math:
             # Calculate sin(x) using Taylor series
             for i in range(0, 100):
                 # Calculate numerator and denominator
-                numerator = sign * Math._powerof(x,2 * i + 1)
+                numerator = sign * Math._powerof(x, 2 * i + 1)
                 denominator = Decimal(Math.factorial(2 * i + 1))
 
                 # Add term to result
@@ -141,13 +138,12 @@ class Math:
                 sign = -sign
 
             return result
-        
+
         except ValueError:
             print("Invalid input for sin() function")
-    
+
     @staticmethod
     def cos(x: float) -> Decimal:
-        
         """Compute the cosine of x using a Taylor series expansion"""
         try:
             # Convert x to radians
@@ -161,7 +157,7 @@ class Math:
             # Calculate cos(x) using Taylor series
             for i in range(0, 100):
                 # Calculate numerator and denominator
-                numerator = sign * Math._powerof(x,2 * i + 1)
+                numerator = sign * Math._powerof(x, 2 * i + 1)
                 denominator = Decimal(Math.factorial(2 * i))
 
                 # Add term to result
@@ -173,16 +169,15 @@ class Math:
             return result
         except ValueError:
             print("Invalid input for cos() function")
-            
-    @staticmethod        
-    def bisection_solver(lower_bound:float, upper_bound:float , error_tolerance = 0.5)->Decimal:
-        
+
+    @staticmethod
+    def bisection_solver(lower_bound: float, upper_bound: float, error_tolerance=0.5) -> Decimal:
         """Solves for a root of a non-linear function, given root boundaries and acceptable error"""
-        
+
         # Convert user-entered string to interpretable mathematical function
-        
+
         lower_bound, upper_bound = Decimal(lower_bound), Decimal(upper_bound)
-        
+
         def compute_alpha(a):  # Initiating the function
             a = Decimal(a)
             return a - Math.sin(a) - (Decimal(Math.get_pi()) / 2)
@@ -193,31 +188,30 @@ class Math:
         # Calculate root using bisection method
         try:
             while actual_error > error_tolerance:
-                
-                    midpoint = (lower_bound + upper_bound) / 2
 
-                    if compute_alpha(lower_bound) * compute_alpha(upper_bound) >= 0:
-                        raise ValueError("No root present within the given values. Try different values")
+                midpoint = (lower_bound + upper_bound) / 2
 
-                    elif compute_alpha(midpoint) * compute_alpha(lower_bound) < 0:
-                        upper_bound = midpoint
-                        actual_error = Math._abs(upper_bound - lower_bound)
+                if compute_alpha(lower_bound) * compute_alpha(upper_bound) >= 0:
+                    raise ValueError(
+                        "No root present within the given values. Try different values")
 
-                    elif compute_alpha(midpoint) * compute_alpha(upper_bound) < 0:
-                        lower_bound = midpoint
-                        actual_error = Math._abs(upper_bound - lower_bound)
+                elif compute_alpha(midpoint) * compute_alpha(lower_bound) < 0:
+                    upper_bound = midpoint
+                    actual_error = Math._abs(upper_bound - lower_bound)
 
-                    else:
-                        raise ValueError("Something went wrong. Invalid input")
-                
-        
+                elif compute_alpha(midpoint) * compute_alpha(upper_bound) < 0:
+                    lower_bound = midpoint
+                    actual_error = Math._abs(upper_bound - lower_bound)
+
+                else:
+                    raise ValueError("Something went wrong. Invalid input")
 
             root = (lower_bound + upper_bound) / 2
             return root
         except ValueError as e:
             print(e)
             return None
-        
+
 
 if __name__ == '__main__':
     print(Math.sin(0.5))
@@ -225,5 +219,5 @@ if __name__ == '__main__':
     print(Math.get_pi())
     print(Math.factorial(4))
     print(Math.factorial(-44))
-    print(Math.bisection_solver(5,500)) #Random numbers given just to check the result
-    
+    # Random numbers given just to check the result
+    print(Math.bisection_solver(5, 500))
