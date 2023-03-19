@@ -47,18 +47,30 @@ def bisection_solver(lower_bound:float, upper_bound:float , error_tolerance = 0.
 def find_alpha():
     # Function to find the value of alpha using Bisection method
     # Returns the value of alpha as a Decimal object
-     
-    # Exception handling is remaining
-    alpha = bisection_solver(0, 10)  # Calling the Bisection method from scratch
+
+    try:
+        alpha = bisection_solver(0, 10)  # Calling the Bisection method from scratch
+        if alpha is None:
+            raise ValueError("Alpha cannot be calculated.")
+    except Exception as e:
+        print(e)
+
     return alpha
 
 
 def get_radius():  
     # Function to get valid radius input from user
     # Returns the radius as a Decimal object
-
-    r = (int)(input("Please enter radius: "))
-    return r
+    while True:
+        try:
+            r = (int)(input("Please enter radius: "))
+            if r < 0:
+                raise ValueError
+            return r
+        except ValueError:
+            print("Invalid Input! radius cannot be less than 0. Please try again")
+        except Exception:
+            print("Invalid Input! Please enter a correct value (a number)")
 
 
 def compute_length(radius, alpha):
