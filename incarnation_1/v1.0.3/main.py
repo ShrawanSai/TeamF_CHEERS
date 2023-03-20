@@ -12,6 +12,7 @@ class Math:
 
     @staticmethod
     def _abs(value: float) -> float:
+        """Function to return absolute value"""
 
         if value >= 0:
             return value
@@ -20,6 +21,8 @@ class Math:
 
     @staticmethod
     def _powerof(base: float, exponent: int) -> float:
+        """Calculates power of the given base and exponent"""
+        
         result = 1
         if exponent == 0:
             return result
