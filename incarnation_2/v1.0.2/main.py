@@ -1,11 +1,10 @@
 import math
 from xml.etree.ElementTree import *
+from decimal import Decimal
 
 
 def bisection_solver(lower_bound: float, upper_bound: float, error_tolerance=0.5):
     """Solves for a root of a non-linear function, given root boundaries and acceptable error"""
-
-    # Convert user-entered string to interpretable mathematical function
 
     lower_bound, upper_bound = (lower_bound), (upper_bound)
 
