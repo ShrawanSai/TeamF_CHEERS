@@ -3,7 +3,7 @@ from xml.etree.ElementTree import *
 from decimal import Decimal
 
 
-def bisection_solver(lower_bound: float, upper_bound: float, error_tolerance=0.01):
+def bisection_solver(lower_bound: float, upper_bound: float, error_tolerance=0.001):
     """Solves for a root of a non-linear function, given root boundaries and acceptable error"""
 
     lower_bound, upper_bound = (lower_bound), (upper_bound)
