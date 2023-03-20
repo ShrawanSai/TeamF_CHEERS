@@ -66,7 +66,7 @@ def get_radius():
     # Returns the radius as a Decimal object
     while True:
         try:
-            r = (int)(input("Please enter radius: "))
+            r = Decimal(input("Please enter radius: "))
             if r < 0:
                 raise ValueError
             return r

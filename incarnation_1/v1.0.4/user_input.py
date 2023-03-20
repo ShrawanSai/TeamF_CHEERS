@@ -56,7 +56,7 @@ def main():
         file.write("Length of line segement X1X2 is : {}\n".format(length))
 
 
-def sample_outputs(sample_radii=[5, 10, 15, 25, 50]):
+def sample_outputs(sample_radii=[5, 10, 15, 20, 25, 30, 35, 40, 45, 50]):
     alpha = find_alpha()
     print("Value of Alpha is: {} Radians".format(alpha))
 
