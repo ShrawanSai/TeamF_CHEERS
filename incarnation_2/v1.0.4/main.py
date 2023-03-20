@@ -45,7 +45,7 @@ def bisection_solver(lower_bound: float, upper_bound: float, error_tolerance=0.0
 
 def find_alpha():
     """Finds the value of alpha using Bisection method"""
-    
+
     # Function to find the value of alpha using Bisection method
     # Returns the value of alpha as a Decimal object
     try:
@@ -61,7 +61,7 @@ def find_alpha():
 
 def get_radius():
     """Gets a valid input from user"""
-    
+
     # Function to get valid radius input from user
     # Returns the radius as a Decimal object
     while True:
@@ -78,7 +78,7 @@ def get_radius():
 
 def compute_length(radius, alpha):
     """computes the length"""
-    
+
     # Function to compute the length of the segment X1X2
     # Returns the length as a Decimal object
     length = 2 * radius * (1 - (math.cos(alpha / 2)))
@@ -87,7 +87,7 @@ def compute_length(radius, alpha):
 
 def write_to_xml(alpha, length):
     """writes the output to XML file"""
-    
+
     root = Element('Output')
     tree = ElementTree(root)
     alphaValue = Element('Alpha')
