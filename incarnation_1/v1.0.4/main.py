@@ -22,7 +22,7 @@ class Math:
     @staticmethod
     def _powerof(base: float, exponent: int) -> float:
         """Calculates power of the given base and exponent"""
-        
+
         result = 1
         if exponent == 0:
             return result
@@ -116,76 +116,33 @@ class Math:
             return None
 
     @staticmethod
-    def sin(theta: float) -> Decimal:
+    def sin(x: float) -> Decimal:
         """Compute the sine of x using a Taylor series expansion"""
+        try:
 
-        # try:
-        #     x = Decimal(x)
+            result = 0
+            for k in range(0, 10):
+                y = ((-1)**k) * (x**(1 + 2 * k)) / \
+                    Math.factorial(1 + 2 * k)  # Taylor Expansion of Sine
+                result += y
 
-        #     # Initialize variables
-        #     result = Decimal('0')
-        #     sign = Decimal('1')
-
-        #     # Calculate sin(x) using Taylor series
-        #     for i in range(0, 100):
-        #         # Calculate numerator and denominator
-        #         numerator = sign * Math._powerof(x, 2 * i + 1)
-        #         denominator = Decimal(Math.factorial(2 * i + 1))
-
-        #         # Add term to result
-        #         result += numerator / denominator
-
-        #         # Update sign for next term
-        #         sign = -sign
-
-        #     return result
-
-        # except ValueError:
-        #     print("Invalid input for sin() function")
-        
-        x = theta
-        m = 0
-
-        for k in range(0, 10, 1):
-            y = ((-1)**k) * (x**(1 + 2 * k)) / \
-                Math.factorial(1 + 2 * k)  # Taylor Expansion of Sine
-            m += y
-
-        return Decimal(m)  # Returning Sine of theta
+            return Decimal(result)  # Returning Sine of theta
+        except ValueError:
+            print("Invalid input for sin() function")
 
     @staticmethod
-    def cos(theta: float) -> Decimal:
+    def cos(x: float) -> Decimal:
         """Compute the cosine of x using a Taylor series expansion"""
-        # try:
-        #     x = Decimal(x)
+        try:
+            result = 0
 
-        #     # Initialize variables
-        #     result = Decimal('0')
-        #     sign = Decimal('1')
-
-        #     # Calculate cos(x) using Taylor series
-        #     for i in range(0, 100):
-        #         # Calculate numerator and denominator
-        #         numerator = sign * Math._powerof(x, 2 * i + 1)
-        #         denominator = Decimal(Math.factorial(2 * i))
-
-        #         # Add term to result
-        #         result += numerator / denominator
-
-        #         # Update sign for next term
-        #         sign = -sign
-
-        #     return result
-        # except ValueError:
-        #     print("Invalid input for cos() function")
-        x = theta
-        m = 0
-
-        for k in range(0, 10, 1):
-            # Taylor Expansion of Cosine
-            y = ((-1)**k) * (x**(2 * k)) / Math.factorial(2 * k)
-            m += y
-        return Decimal(m)  # Returning Cosine of theta
+            for k in range(0, 10, 1):
+                # Taylor Expansion of Cosine
+                y = ((-1)**k) * (x**(2 * k)) / Math.factorial(2 * k)
+                result += y
+            return Decimal(result)  # Returning Cosine of theta
+        except ValueError:
+            print("Invalid input for cos() function")
 
     @staticmethod
     def bisection_solver(lower_bound: float, upper_bound: float, error_tolerance=0.01) -> Decimal:
