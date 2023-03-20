@@ -116,65 +116,79 @@ class Math:
             return None
 
     @staticmethod
-    def sin(x: float) -> Decimal:
+    def sin(theta: float) -> Decimal:
         """Compute the sine of x using a Taylor series expansion"""
 
-        try:
-            # Convert x to radians
-            x = Decimal(x)
-            x = x * Decimal('0.01745329251994329576923690768')
+        # try:
+        #     x = Decimal(x)
 
-            # Initialize variables
-            result = Decimal('0')
-            sign = Decimal('1')
+        #     # Initialize variables
+        #     result = Decimal('0')
+        #     sign = Decimal('1')
 
-            # Calculate sin(x) using Taylor series
-            for i in range(0, 100):
-                # Calculate numerator and denominator
-                numerator = sign * Math._powerof(x, 2 * i + 1)
-                denominator = Decimal(Math.factorial(2 * i + 1))
+        #     # Calculate sin(x) using Taylor series
+        #     for i in range(0, 100):
+        #         # Calculate numerator and denominator
+        #         numerator = sign * Math._powerof(x, 2 * i + 1)
+        #         denominator = Decimal(Math.factorial(2 * i + 1))
 
-                # Add term to result
-                result += numerator / denominator
+        #         # Add term to result
+        #         result += numerator / denominator
 
-                # Update sign for next term
-                sign = -sign
+        #         # Update sign for next term
+        #         sign = -sign
 
-            return result
+        #     return result
 
-        except ValueError:
-            print("Invalid input for sin() function")
+        # except ValueError:
+        #     print("Invalid input for sin() function")
+        
+        x = theta
+        m = 0
+
+        for k in range(0, 10, 1):
+            y = ((-1)**k) * (x**(1 + 2 * k)) / \
+                Math.factorial(1 + 2 * k)  # Taylor Expansion of Sine
+            m += y
+
+        return Decimal(m)  # Returning Sine of theta
 
     @staticmethod
-    def cos(x: float) -> Decimal:
+    def cos(theta: float) -> Decimal:
         """Compute the cosine of x using a Taylor series expansion"""
-        try:
-            # Convert x to radians
-            x = Decimal(x)
-            x = x * Decimal('0.01745329251994329576923690768')
+        # try:
+        #     x = Decimal(x)
 
-            # Initialize variables
-            result = Decimal('0')
-            sign = Decimal('1')
+        #     # Initialize variables
+        #     result = Decimal('0')
+        #     sign = Decimal('1')
 
-            # Calculate cos(x) using Taylor series
-            for i in range(0, 100):
-                # Calculate numerator and denominator
-                numerator = sign * Math._powerof(x, 2 * i + 1)
-                denominator = Decimal(Math.factorial(2 * i))
+        #     # Calculate cos(x) using Taylor series
+        #     for i in range(0, 100):
+        #         # Calculate numerator and denominator
+        #         numerator = sign * Math._powerof(x, 2 * i + 1)
+        #         denominator = Decimal(Math.factorial(2 * i))
 
-                # Add term to result
-                result += numerator / denominator
+        #         # Add term to result
+        #         result += numerator / denominator
 
-                # Update sign for next term
-                sign = -sign
+        #         # Update sign for next term
+        #         sign = -sign
 
-            return result
-        except ValueError:
-            print("Invalid input for cos() function")
+        #     return result
+        # except ValueError:
+        #     print("Invalid input for cos() function")
+        x = theta
+        m = 0
+
+        for k in range(0, 10, 1):
+            # Taylor Expansion of Cosine
+            y = ((-1)**k) * (x**(2 * k)) / Math.factorial(2 * k)
+            m += y
+        return Decimal(m)  # Returning Cosine of theta
 
     @staticmethod
-    def bisection_solver(lower_bound: float, upper_bound: float, error_tolerance=0.5) -> Decimal:
+    def bisection_solver(lower_bound: float, upper_bound: float, error_tolerance=0.01) -> Decimal:
         """Solves for a root of a non-linear function, given root boundaries and acceptable error"""
 
         # Convert user-entered string to interpretable mathematical function
