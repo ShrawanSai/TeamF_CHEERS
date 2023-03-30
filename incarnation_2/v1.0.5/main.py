@@ -66,7 +66,7 @@ def get_radius():
     # Returns the radius as a Decimal object
     while True:
         try:
-            r = Decimal(input("Please enter radius: "))
+            r = int(input("Please enter radius: "))
             if r < 0:
                 raise ValueError
             return r
@@ -98,6 +98,21 @@ def write_to_xml(alpha, length):
     lengthValue.text = 'Value of length is : ' + str(length)
     tree.write(open('./output.xml', 'wb'))
 
+def write_to_sample_xml(alphas, lengths):
+    """writes sample input' ouput in xml file"""
+    
+    root = Element('SampleOutput')
+    tree = ElementTree(root)
+    for i in range (0,len(alphas)):
+        output = Element('Output')
+        alphaValue = Element('Alpha')
+        output.append(alphaValue)
+        lengthValue = Element('Length')
+        output.append(lengthValue)
+        alphaValue.text = 'Value of Alpha is: ' + str(alphas[i]) + 'Radians'
+        lengthValue.text = 'Value of length is : ' + str(lengths[i])
+        root.append(output)
+    tree.write(open('./sample_output.xml', 'wb'))
 
 def main():
 
@@ -113,6 +128,17 @@ def main():
 
     write_to_xml(alpha, length)
 
+def sample_outputs():
+    radius = [3, 31, 12, 9, 1]
+    alphas = []
+    lengths = []
+    for val in radius:
+        alpha = find_alpha()
+        length = compute_length(val, alpha)
+        alphas.append(alpha)
+        lengths.append(length)
+    write_to_sample_xml(alphas, lengths)
 
 if __name__ == '__main__':
+    sample_outputs()
     main()
