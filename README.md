@@ -5,7 +5,10 @@ Official Git repository of TEAM-F for the CHEERS project as part of the project 
 # Steps to run code
 ### Incarnation 1
  - Make sure the following folder structure is maintained:
+ 
 ![Incarnation 1.jpg](https://github.com/ShrawanSai/TeamF_CHEERS/blob/main/images/Incarnation1.png)
+
+
  - The Math functions are implemented in "main.py" and the driver code is called "user_input.py"
  - The "pi_at_1000_rounds.pkl" file is used for accessing the value of PI faster instead of computing it from scratch every time.
  - The driver code runs 2 functions which are:
@@ -17,7 +20,10 @@ Official Git repository of TEAM-F for the CHEERS project as part of the project 
 
 ### Incarnation 2
  - Make sure the following folder structure is maintained:
+ 
 ![Incarnation 2.jpg](https://github.com/ShrawanSai/TeamF_CHEERS/blob/main/images/Incarnation2.png)
+
+
  - The only python file "main.py" is the driver code that has the full implementation of the incarnation
  - The driver code runs 2 functions which are:
 				 - sample_outputs(): which runs the code on a set of sample radii
