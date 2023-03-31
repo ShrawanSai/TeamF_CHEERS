@@ -137,6 +137,7 @@ def sample_outputs():
         length = compute_length(val, alpha)
         alphas.append(alpha)
         lengths.append(length)
+        
     write_to_sample_xml(alphas, lengths)
 
 if __name__ == '__main__':
