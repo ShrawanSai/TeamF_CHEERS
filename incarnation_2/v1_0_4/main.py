@@ -129,7 +129,7 @@ def main():
     write_to_xml(alpha, length)
 
 def sample_outputs():
-    radius = [3, 31, 12, 9, 1]
+    radius = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
     alphas = []
     lengths = []
     for val in radius:
@@ -138,7 +138,7 @@ def sample_outputs():
         alphas.append(alpha)
         lengths.append(length)
         
-    write_to_sample_xml(alphas, lengths)
+    return lengths
 
 if __name__ == '__main__':
     sample_outputs()

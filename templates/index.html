@@ -1,19 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Team G's WebApp</title>
+    <title>Team F's WebApp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
+    <style>
+        /* Small devices (phones, 576px and up) */
+        @media (min-width: 576px) {
+            .container {
+                max-width: 540px;
+            }
+        }
+
+        /* Medium devices (tablets, 768px and up) */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+            }
+        }
+
+        /* Large devices (desktops, 992px and up) */
+        @media (min-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+        }
+
+        /* Extra large devices (large desktops, 1200px and up) */
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1140px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Team F's WebApp</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#home">User Input</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#testcases" id="test-cases-link">Run Test Cases</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container" id="home">
         <br> <br>
-        <h1 class="text-center">Team G's WebApp</h1>
+        <h1 class="text-center">Team F's WebApp</h1>
         {% if error %}
             <div class="alert alert-danger">{{ error }}</div>
         {% endif %}
-        <form method="POST">
+        <form method="POST" action="/">
             <div class="form-group">
                 <label for="incarnation">Choose an incarnation:</label>
                 <select class="form-control" id="incarnation" name="option">
@@ -28,11 +76,13 @@
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+        <br><hr>
+        <h3>Input radius = {{radius}}</h3>
         {% if length_to_move is not none %}
             <h3>Selected option: {{ option }}.</h3>
             <p>The value of alpha is: {{ alpha }}.</p>
             <p>The length of line segment X1X2 is : {{ length_to_move }}.</p>
-            {% if option != 'Incarnation 1 results' %}
+            {% if option == 'Incarnation 2 results' or option == 'Results from both Incarnation 1 and 2' %}
                 <a href="{{ url_for('download_xml') }}" class="btn btn-success">Download XML file</a>
             {% endif %}
         {% endif %}
@@ -45,6 +95,34 @@
             </script>
         {% endif %}
     </div>
+    <div class="container" id = "testcases">
+
+        <form method="POST" action="/testcase">
+            <button type="submit" class="btn btn-primary" >View results on test cases</button>
+        </form>
+        {% if table %}
+            <table class="table">
+            <thead>
+                <tr>
+                <th>#</th>
+                <th>Test Case (Radius)</th>
+                <th>Incarnation-1 result</th>
+                <th>Incarnation-2 result</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for test_case in table %}
+                <tr>
+                <td>{{test_case[0]}}</td>
+                <td>{{test_case[1]}}</td>
+                <td>{{test_case[2]}}</td>
+                <td>{{test_case[3]}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        {% endif %}
+      </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
@@ -54,5 +132,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
+    <script>
+    document.getElementById("test-cases-link").addEventListener("click", function() {
+        document.getElementById("testcases").scrollIntoView();
+      });
+      </script>
 </body>
 </html>
+

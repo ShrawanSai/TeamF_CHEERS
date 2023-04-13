@@ -6,6 +6,14 @@ import math
 
 app = Flask(__name__)
 
+def inc1_testcases(sample_radii=[5, 10, 15, 20, 25, 30, 35, 40, 45, 50]):
+    alpha = find_alpha()
+    tcs_from_inc1 = []
+    for radius in sample_radii:
+        length = compute_length_inc1(radius, alpha)
+        tcs_from_inc1.append(length)
+    return tcs_from_inc1
+
 def get_radius(r):
     try:
         r = Decimal(r)
@@ -53,26 +61,43 @@ def home():
         if not isinstance(processed_radius,Decimal):
             # Return error message and input value to re-populate form
             return render_template('index.html', error=processed_radius, length_input=length)
-        length = int(processed_radius)
+        length = processed_radius
         
         if option == 'incarnation1':
             alpha = find_alpha()
             length_to_move = compute_length_inc1(length, alpha)
+            length_to_move = str(length_to_move)[:12]
             option = "Incarnation 1 results"
         elif option == 'incarnation2':
             alpha = main.find_alpha()
-            length_to_move = main.compute_length(length, alpha)
+            length_to_move = main.compute_length(float(length), alpha)
+            length_to_move = str(length_to_move)[:12]
             main.write_to_xml(alpha, length)
             option = "Incarnation 2 results"
         else:
             alpha = find_alpha()
+            alpha2 = main.find_alpha()
             length_to_move_inc1 = compute_length_inc1(length, alpha)
-            length_to_move_inc2 = main.compute_length(length, alpha)
+            length_to_move_inc2 = main.compute_length(float(length), alpha2)
+            length_to_move_inc2 = str(length_to_move_inc2)[:12]
+            length_to_move_inc1 = str(length_to_move_inc1)[:12]
             length_to_move = f'{length_to_move_inc1} units for Incarnation 1 &  \n {length_to_move_inc2} units for Incarnation 2'
             option = "Results from both Incarnation 1 and 2"
-        return render_template('index.html', length_to_move=length_to_move,alpha = alpha,option = option)
+        alpha = str(alpha)[:12]
+        return render_template('index.html', length_to_move=length_to_move,alpha = alpha,option = option, radius = length )
     else:
         return render_template('index.html')
+    
+@app.route('/testcase', methods=['POST'])
+def test_cases():
+    radii = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+    tcs_from_inc1 = inc1_testcases()
+    tcs_from_inc2 = main.sample_outputs()
 
+    table = []
+
+    for i in range(len(radii)):
+        table.append([i+1,radii[i], str(tcs_from_inc1[i])[:12], str(tcs_from_inc2[i])[:12] ])
+    return render_template('index.html',table = table)
 if __name__ == '__main__':
     app.run(debug=True)
